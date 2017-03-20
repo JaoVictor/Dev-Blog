@@ -20,6 +20,9 @@ public class NovoUsuarioService {
 
 	public UsuarioId novo(String nome, String email, String senha) {
 		
+		if(usuarioRepositorio.obterPeloEmail(email).isPresent())
+			throw new RuntimeException(ERR_EMAIL_JA_EXISTE);
+		
 		Usuario usuario = new Usuario(
 				usuarioRepositorio.proximaIdentidade(), 
 				nome, 

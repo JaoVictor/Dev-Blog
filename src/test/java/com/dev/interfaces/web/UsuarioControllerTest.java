@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,6 +14,9 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -45,13 +47,13 @@ public class UsuarioControllerTest {
 				"\"email\": \"email@email.com.br\","+
 				"\"senha\": \"senha do usuario\"}";
 		
-		when(novoUsuarioServicoAplicacao.novoUsuario(any()))
-			.thenReturn("USUARIO-ID");
+		given(novoUsuarioServicoAplicacao.novoUsuario(any()))
+			.willReturn("USUARIO-ID");
 		
-		this.mvc.perform(post("/usuarios").contentType(APPLICATION_JSON)
+		this.mvc.perform(post("/usuarios").contentType(MediaType.APPLICATION_JSON)
 				.content(payload))
 			.andExpect(status().isCreated())
-			.andExpect(redirectedUrlPattern("http://*/usuario/USUARIO-ID"));
+			.andExpect(redirectedUrlPattern("http://*/usuarios/USUARIO-ID"));
 		
 		ArgumentCaptor<NovoUsuarioComando> argument = ArgumentCaptor.forClass(NovoUsuarioComando.class);
 		verify(novoUsuarioServicoAplicacao).novoUsuario(argument.capture());

@@ -1,6 +1,7 @@
 package com.dev.dominio.usuario;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,6 +38,9 @@ public class NovoUsuarioServiceTest {
 	
 	@Test
 	public void novoUsuario_DadosIniciais_novoUsuarioCriado(){
+		
+		when(usuarioRepositorio.obterPeloEmail(any()))
+			.thenReturn(Optional.empty());
 		
 		novoUsuarioService.novo(
 				"nome",

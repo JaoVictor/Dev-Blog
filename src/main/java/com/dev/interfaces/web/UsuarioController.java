@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 
@@ -40,10 +41,10 @@ public class UsuarioController {
 	
 
 	@GetMapping("/{id}")
-	public String obter(@PathVariable String id){
+	public @ResponseBody ResponseEntity<String> obter(@PathVariable String id){
 //		PesquisaAgenciaPeloIdComando comando = new PesquisaAgenciaPeloIdComando(id);
 //		return pesquisaAgenciaServicoAplicacao.obter(comando);
 		return null;
-		
 	}
+	
 }

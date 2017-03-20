@@ -6,6 +6,8 @@ public class NovoUsuarioComando {
 	private String email;
 	private String senha;
 	
+	public NovoUsuarioComando(){}
+	
 	public NovoUsuarioComando(String nome, String email, String senha) {
 		setNome(nome);
 		setEmail(email);
